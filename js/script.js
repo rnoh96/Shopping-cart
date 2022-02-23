@@ -1,18 +1,3 @@
-if(document.readyState == "loading") {
-    document.addEventListener("DOMContentLoaded", ready)
-} else {
-    ready()
-}
-
-function ready() {
-    let removeBtn = document.querySelectorAll(".remove-btn")
-    removeBtn.forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            console.log("gdfsdf")
-        })
-    })
-}
-
 // Event listener that adds item to the cart
 let addToCartBtn = document.querySelectorAll(".addToCartBtn");
 let cartList = document.querySelector(".cart-list");
@@ -53,7 +38,6 @@ addToCartBtn.forEach(btn => {
             addPrice(itemPrice, cartItem)
             addQuantity(itemName, cartItem)
             updateTotal()
-            // removeBtn = document.querySelectorAll(".remove-btn")
         }
     })
 })
@@ -122,7 +106,6 @@ function addQuantity(name, element=undefined) {
 }
 
 // Function that updates total amount of the item in cart
-// let total = document.querySelector(".total-amount")
 function updateTotal() {
 
     let total = document.querySelector(".total-amount")
@@ -141,10 +124,3 @@ function updateTotal() {
         totalAmount = totalAmount.toFixed(2)
         total.innerHTML = totalAmount
 }
-
-// Event listener that removes item in the cart
-// let removeBtn = null
-
-// removeBtn.addEventListener("click", () => {
-//     console.log(removeBtn)
-// })
