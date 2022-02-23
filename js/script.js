@@ -36,9 +36,16 @@ addToCartBtn.forEach(btn => {
 
             addItem(imgSrc, itemName, cartItem)
             addPrice(itemPrice, cartItem)
-            addQuantity(cartItem)
+            addQuantity(itemName, cartItem)
+            updateTotal()
+            // removeBtn = document.querySelectorAll(".remove-btn")
         }
     })
+})
+
+// Event listener that updates total when quantity is changed
+cartList.addEventListener("click", () => {
+    updateTotal()
 })
 
 // Function that adds item image and the name to the cart list
@@ -64,7 +71,7 @@ let addPrice = (price, element=undefined) => {
 
     div.append(price)
 
-    div.className = "cart-item-div"
+    div.className = "cart-item-div price"
 
     if(element) {
         element.append(div)
@@ -72,7 +79,7 @@ let addPrice = (price, element=undefined) => {
 }
 
 // Function that adds quantity of the item and remove button
-let addQuantity = (element=undefined) => {
+let addQuantity = (name, element=undefined) => {
     let div = document.createElement("div")
     let input = document.createElement("input")
     let btn = document.createElement("button")
@@ -81,6 +88,8 @@ let addQuantity = (element=undefined) => {
     btn.className = "remove-btn"
     input.type = "number"
     input.value = 1
+    input.name = name
+    input.min = 1
 
     div.append(input)
     div.append(btn)
@@ -92,4 +101,30 @@ let addQuantity = (element=undefined) => {
     }
 }
 
+// Function that updates total amount of the item in cart
+// let total = document.querySelector(".total-amount")
+let updateTotal = () => {
+
+    let total = document.querySelector(".total-amount")
+    let cartItem = document.querySelectorAll(".cart-item")
+    tempArr = []
+    cartItem.forEach(item => {
+        let price = parseFloat(item.children[1].innerText.replace("'"&&"$", ""))
+        let quantity = item.children[2].children[0].value
+        let p = price * quantity
+        tempArr.push(p)
+    })
+
+    let totalAmount = tempArr.reduce((x, y) => {
+            return x + y
+        }, 0)
+        totalAmount = totalAmount.toFixed(2)
+        total.innerHTML = totalAmount
+}
+
 // Event listener that removes item in the cart
+// let removeBtn = null
+
+// removeBtn.addEventListener("click", () => {
+//     console.log(removeBtn)
+// })
