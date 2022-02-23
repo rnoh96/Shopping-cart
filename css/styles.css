@@ -48,19 +48,25 @@
     border-bottom: 3px solid black;
 }
 
-.cart-list {
+.cart-item {
     display: grid;
     grid-template-columns: 3fr 1fr 2fr;
     grid-column-gap: 30px;
+    /* text-align: center;
+    vertical-align: middle; */
 }
 
-.cart-list > div {
-    border-bottom: 1px solid black;
-    text-align: center;
-    vertical-align: middle;
+.cart-item-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cart-list img {
-    width: 100px;
-    height: 130px;
+    width: 50px;
+    height: 70px;
+}
+
+input[type="number"] {
+    width: 30px;
 }
