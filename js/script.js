@@ -1,3 +1,18 @@
+if(document.readyState == "loading") {
+    document.addEventListener("DOMContentLoaded", ready)
+} else {
+    ready()
+}
+
+function ready() {
+    let removeBtn = document.querySelectorAll(".remove-btn")
+    removeBtn.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            console.log("gdfsdf")
+        })
+    })
+}
+
 // Event listener that adds item to the cart
 let addToCartBtn = document.querySelectorAll(".addToCartBtn");
 let cartList = document.querySelector(".cart-list");
@@ -44,12 +59,12 @@ addToCartBtn.forEach(btn => {
 })
 
 // Event listener that updates total when quantity is changed
-cartList.addEventListener("click", () => {
+cartList.addEventListener("change", () => {
     updateTotal()
 })
 
 // Function that adds item image and the name to the cart list
-let addItem = (imgSrc, name, element=undefined) => {
+function addItem(imgSrc, name, element=undefined) {
     let img = document.createElement("img");
     let div = document.createElement("div")
 
@@ -66,7 +81,7 @@ let addItem = (imgSrc, name, element=undefined) => {
 }
 
 // Function that adds the price to the cart list
-let addPrice = (price, element=undefined) => {
+function addPrice(price, element=undefined) {
     let div = document.createElement("div")
 
     div.append(price)
@@ -79,13 +94,18 @@ let addPrice = (price, element=undefined) => {
 }
 
 // Function that adds quantity of the item and remove button
-let addQuantity = (name, element=undefined) => {
+function addQuantity(name, element=undefined) {
     let div = document.createElement("div")
     let input = document.createElement("input")
     let btn = document.createElement("button")
 
     btn.textContent = "Remove"
     btn.className = "remove-btn"
+    btn.addEventListener("click", (e) => {
+        e.target.parentElement.parentElement.remove()
+        updateTotal()
+    })
+
     input.type = "number"
     input.value = 1
     input.name = name
@@ -103,7 +123,7 @@ let addQuantity = (name, element=undefined) => {
 
 // Function that updates total amount of the item in cart
 // let total = document.querySelector(".total-amount")
-let updateTotal = () => {
+function updateTotal() {
 
     let total = document.querySelector(".total-amount")
     let cartItem = document.querySelectorAll(".cart-item")
